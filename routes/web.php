@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+// tugas laravel 1
+/*
 Route::group(['prefix' => 'list-menu'], function () {
     Route::get('/', function () {
         return 'Ini adalah halaman yang menampilkan semua menu di Amandemy Cafe.';
@@ -46,4 +49,10 @@ Route::group(['prefix' => 'list-menu'], function () {
         $menu = "Anda memilih makanan $makanan dengan harga $harga";
         return $menu;
     });
+});
+*/
+
+//  Tugas Laravel 2
+Route::group(['prefix' => 'amandemy-cafe'], function(){
+    Route::get('/', [DashboardController::class,'index'])->name('index');
 });
