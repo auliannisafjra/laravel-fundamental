@@ -11,15 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('prodi', function (Blueprint $table) {
+        Schema::create('mahasiswa', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('prodi_id');
             $table->string('nama');
-            $table->enum('jenjang', ['D3', 'S1', 'S2'])->default('S1');
-            $table->foreignId('fk_id')->constrained(table: 'fakultas');
-            $table->integer('kaprodi_id');
-            $table->string('telp');
-            $table->text('deskripsi')->nullable();
+            $table->string('nim')->unique();
+            $table->date('tgl_lahir');
+            $table->text('alamat')->nullable();
+            $table->enum('gender', ['L', 'P']);
             $table->timestamps();
+
+            $table->foreign('prodi_id')->references('id')->on('prodi');
         });
     }
 
@@ -28,6 +30,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('prodi');
+        Schema::dropIfExists('mahasiswa');
     }
 };

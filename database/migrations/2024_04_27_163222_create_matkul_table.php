@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mahasiswa', function (Blueprint $table) {
+        Schema::create('matkul', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('prodi_id');
+            $table->unsignedBigInteger('dosen_id');
             $table->string('nama');
-            $table->string('nim')->unique();
-            $table->date('tgl_lahir');
-            $table->text('alamat')->nullable();
-            $table->enum('gender', ['L', 'P']);
+            $table->dateTime('waktu');
             $table->timestamps();
+
+            $table->foreign('prodi_id')->references('id')->on('prodi');
+            $table->foreign('dosen_id')->references('id')->on('dosen');
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mahasiswa');
+        Schema::dropIfExists('matkul');
     }
 };

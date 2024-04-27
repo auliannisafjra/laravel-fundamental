@@ -11,13 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('matakuliah', function (Blueprint $table) {
+        Schema::create('matkul_ambil', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('prodi_id')->constrained(table: 'prodi');
-            $table->foreignId('dosen_id')->constrained(table: 'dosen');
-            $table->string('nama');
-            $table->dateTime('waktu');
+            $table->unsignedBigInteger('matkul_id');
+            $table->unsignedBigInteger('mhs_id');
             $table->timestamps();
+
+            $table->foreign('matkul_id')->references('id')->on('matkul');
+            $table->foreign('mhs_id')->references('id')->on('mahasiswa');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('matakuliah');
+        Schema::dropIfExists('matkul_ambil');
     }
 };
