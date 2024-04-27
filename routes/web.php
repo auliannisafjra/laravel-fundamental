@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProdukController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,6 +54,12 @@ Route::group(['prefix' => 'list-menu'], function () {
 */
 
 //  Tugas Laravel 2
-Route::group(['prefix' => 'amandemy-cafe'], function(){
+/* Route::group(['prefix' => 'amandemy-cafe'], function(){
     Route::get('/', [DashboardController::class,'index'])->name('index');
 });
+*/
+
+// tugas laravel 3
+Route::get('/katalog', [ProdukController::class, 'index'])->name('katalog');
+Route::get('/form-produk', [ProdukController::class, 'create'])->name('form-produk');
+Route::post('/katalog', [ProdukController::class, 'store'])->name('product.index');
