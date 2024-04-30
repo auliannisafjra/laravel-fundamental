@@ -15,9 +15,11 @@
 
 <body>
     <main>
-        @if ($errors->any())
-            <div class="container bg-danger text-light rounded-3 my-3" style="max-width: 400px; font-weight: bolder;">
-                <p>{{ $errors->first() }}</p>
+
+
+        @if (Session::has('error'))
+            <div class="container bg-danger text-light rounded-3 my-3 p-3" style="max-width: 400px; font-weight: bolder;">
+                <h3 class="fw-bold" style="font-size: 20px">{{ Session::get('error') }}</h3>
             </div>
         @endif
 
@@ -25,7 +27,7 @@
             <div class="row">
                 <div class="col rounded-3 bg-info p-3 my-2">
                     <h2>Tambah Data Produk</h2>
-                    <form action="{{ route('product.index') }}" method="POST">
+                    <form action="{{ route('produk') }}" method="POST">
                         @csrf
                         <div class="mb-3">
                             <label for="nama" class="form-label">Nama Produk</label>

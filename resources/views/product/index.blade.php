@@ -19,7 +19,7 @@
             <div class="row align-items-center">
                 <div class="text-center mb-5">
                     <h1>PRODUCTS</h1>
-                    <hr style="width: 10em; margin: 0 auto; border: 2px solid black">
+                    <div class="border border-top border-black mx-auto mt-3" style="width: 100px"></div>
                 </div>
                 @foreach ($produk as $barang)
                     <div class="col-md-3">

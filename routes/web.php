@@ -62,4 +62,4 @@ Route::group(['prefix' => 'list-menu'], function () {
 // tugas laravel 3
 Route::get('/katalog', [ProdukController::class, 'index'])->name('katalog');
 Route::get('/form-produk', [ProdukController::class, 'create'])->name('form-produk');
-Route::post('/katalog', [ProdukController::class, 'store'])->name('product.index');
+Route::post('/katalog', [ProdukController::class, 'store'])->name('produk');

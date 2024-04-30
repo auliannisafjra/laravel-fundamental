@@ -41,7 +41,11 @@ class ProdukController extends Controller
 
         $baru = Session::get('produk');
 
-        return view('product.index', ['produk' => array_merge($data, [$baru])]);
+        if ($baru) {
+            $data[] = $baru;
+        }
+
+        return view('product.index', ['produk' => $data]);
     }
 
     public function create()
@@ -51,41 +55,32 @@ class ProdukController extends Controller
 
     public function store(Request $request)
     {
-        // dd($request->all());
-
-        $validasi = $request->validate([
-            'nama' => 'required',
-            'berat' => 'required',
-            'harga' => 'required',
-            'stok' => 'required',
-            'kondisi' => 'required',
-            'deskripsi' => 'required',
-        ], [
-            'nama.required' => 'Kolom nama harus diisi!',
-            'berat.required' => 'Kolom berat harus diisi!',
-            'harga.required' => 'Kolom harga harus diisi!',
-            'stok.required' => 'Kolom stok harus diisi!',
-            'kondisi.required' => 'Kolom kondisi harus diisi!',
-            'deskripsi.required' => 'Kolom deskripsi harus diisi!',
-        ]);
-
-        if ($validasi) {
+        if (!$request->filled('nama')) {
+            return redirect()->back()->with('error', 'Error. Field Nama Produk Wajib diisi.');
+        } else if (!$request->filled('berat')) {
+            return redirect()->back()->with('error', 'Error. Field Berat Wajib diisi.');
+        } else if (!$request->filled('harga')) {
+            return redirect()->back()->with('error', 'Error. Field Harga Wajib diisi.');
+        } else if (!$request->filled('stok')) {
+            return redirect()->back()->with('error', 'Error. Field Stok Wajib diisi.');
+        } else if ($request->input('kondisi') == 0) {
+            return redirect()->back()->with('error', 'Error. Field Kondisi Wajib diisi.');
+        } else if (!$request->filled('deskripsi')) {
+            return redirect()->back()->with('error', 'Error. Field Deskripsi Wajib diisi.');
         } else {
-            return redirect()->back()->withErrors($validasi)->withInput();
+            $baru = [
+                'nama' => $request->input('nama'),
+                'berat' => $request->input('berat'),
+                'harga' => $request->input('harga'),
+                'stok' => $request->input('stok'),
+                'kondisi' => $request->input('kondisi'),
+                'deskripsi' => $request->input('deskripsi'),
+                'foto' => $request->input('foto', asset('assets/new-produk.jpg'))
+            ];
+
+            Session::put('produk', $baru);
+
+            return redirect()->route('katalog');
         }
-
-        $baru = [
-            'nama' => $request->input('nama'),
-            'berat' => $request->input('berat'),
-            'harga' => $request->input('harga'),
-            'stok' => $request->input('stok'),
-            'kondisi' => $request->input('kondisi'),
-            'deskripsi' => $request->input('deskripsi'),
-            'foto' => $request->input('foto', asset('assets/new-produk.jpg'))
-        ];
-
-        Session::put('produk', $baru);
-
-        return redirect()->route('katalog');
     }
 }
