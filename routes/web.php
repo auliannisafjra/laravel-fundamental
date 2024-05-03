@@ -2,7 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ProdukController;
+use App\Http\Controllers\KatalogController;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,13 @@ Route::group(['prefix' => 'list-menu'], function () {
 */
 
 // tugas laravel 3
-Route::get('/katalog', [ProdukController::class, 'index'])->name('katalog');
-Route::get('/form-produk', [ProdukController::class, 'create'])->name('form-produk');
-Route::post('/katalog', [ProdukController::class, 'store'])->name('produk');
+/*
+Route::get('/katalog', [KatalogController::class, 'index'])->name('katalog');
+Route::get('/form-produk', [KatalogController::class, 'create'])->name('form-produk');
+Route::post('/katalog', [KatalogController::class, 'store'])->name('produk');
+*/
+
+// Tugas Laravel CRUD
+Route::get('/product', [ProductController::class, 'index'])->name('product');
+Route::get('/form-product', [ProductController::class, 'create'])->name('form-product');
+Route::post('/products', [ProductController::class, 'store'])->name('products.store');

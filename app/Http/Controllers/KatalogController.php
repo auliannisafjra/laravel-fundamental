@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
-class ProdukController extends Controller
+class KatalogController extends Controller
 {
     public function index()
     {
@@ -45,12 +45,12 @@ class ProdukController extends Controller
             $data[] = $baru;
         }
 
-        return view('product.index', ['produk' => $data]);
+        return view('katalog.index', ['produk' => $data]);
     }
 
     public function create()
     {
-        return view('product.form');
+        return view('katalog.form');
     }
 
     public function store(Request $request)
